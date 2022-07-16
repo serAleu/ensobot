@@ -1,2 +1,5 @@
 .idea/
-target/
+.target/
+src/main/resources/requests
+!**/src/main/**/target/
+!**/src/test/**/target/
