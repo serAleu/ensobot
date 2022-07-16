@@ -1,4 +1,4 @@
-package com.config;
+package com.bot.config;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
