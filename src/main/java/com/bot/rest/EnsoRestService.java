@@ -1,6 +1,7 @@
 package com.bot.rest;
 
 import com.bot.repository.EnsoRepository;
+import com.bot.repository.dto.RainbowEnso;
 import com.bot.rest.model.ResponseModel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,13 +19,15 @@ public class EnsoRestService {
 
     final EnsoRepository ensoRepository;
 
-    public List<ResponseModel> runEnsoScenario(EnsoRestController.EnsoRequest ensoRequest){
+    public List<ResponseModel> runEnsoScenario(EnsoRestController.EnsoRequest ensoRequest) {
         try {
             List<ResponseModel> responseModelList = new ArrayList<>();
             ensoRequest.scenarioIdList().stream()
                     .filter(scenariodId -> scenariodId != null && scenariodId >= 1 && scenariodId <= 3)
                     .forEach(scenarioId -> {
+                        RainbowEnso rainbowEnso = ensoRepository.getRainbowEnsoByScenarioId(scenarioId);
                         responseModelList.add(new ResponseModel()
+                                .setRainbowEnso(rainbowEnso)
                                 .setScenarioId(scenarioId)
                                 .setScenarioDescription(defineScenarioDescriptionByScenarioId(scenarioId))
                                 .setRequestName(ensoRequest.requestName()));
@@ -43,5 +46,4 @@ public class EnsoRestService {
             default -> "undefined scenario";
         };
     }
-
 }

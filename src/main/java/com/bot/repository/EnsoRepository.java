@@ -23,8 +23,11 @@ public class EnsoRepository {
                             .setScenarioId(rs.getLong("SCENARIO_ID"))
                             .setScenarioName(rs.getString("SCENARIO_NAME")),
             scenarioId);
-        } catch (EmptyResultDataAccessException e){
-            return null;
+//        } catch (EmptyResultDataAccessException e){
+        } catch (Exception e){
+            return new RainbowEnso()
+                    .setScenarioName("O_o")
+                    .setScenarioId(0L);
         }
     }
 
